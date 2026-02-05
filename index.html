@@ -1,74 +1,71 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Citymapper Horizon - POC École</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <section class="hero-section" id="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Redéfinir la <span class="highlight">Mobilité</span></h1>
-            <p class="hero-subtitle">Vivre la ville, pas seulement la traverser.</p>
-            <div class="hero-buttons">
-                <a href="#app" class="btn-hero btn-hero-primary">Découvrir l'expérience</a>
+<section class="recommendations-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Paris : voir les expériences à proximité</h2>
+            <p>Choix incontournables à proximité</p>
+        </div>
+        
+        <div class="recommendation-grid">
+            <div class="recom-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550156141-1782dd488941?auto=format&fit=crop&w=400');">
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="card-info">
+                    <span class="badge">Meilleures ventes</span>
+                    <h3>Dîner Croisière Prestige au départ de la Tour Eiffel</h3>
+                    <div class="rating">4,4 <span class="stars">●●●●◐</span> (491)</div>
+                    <div class="price">à partir de 62€ par adulte</div>
+                </div>
+            </div>
+
+            <div class="recom-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=400');">
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    <div class="travel-badge">2025</div>
+                </div>
+                <div class="card-info">
+                    <span class="badge">Meilleures ventes</span>
+                    <h3>Musée du Louvre - Visite guidée exclusive (entrée incluse)</h3>
+                    <div class="rating">5,0 <span class="stars">●●●●●</span> (3257)</div>
+                    <div class="price">à partir de 150€ par adulte</div>
+                </div>
+            </div>
+
+            <div class="recom-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400');">
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+                <div class="card-info">
+                    <span class="badge">Meilleures ventes</span>
+                    <h3>Bateaux Parisiens Seine Dîner gastronomique</h3>
+                    <div class="rating">4,3 <span class="stars">●●●●◐</span> (2930)</div>
+                    <div class="price">à partir de 125€ par adulte</div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="app-section" id="app">
-        <header class="header">
-            <nav class="nav">
-                <a href="#hero" class="logo"><i class="fas fa-map-marked-alt"></i> <span>Horizon</span></a>
-            </nav>
-        </header>
-
-        <div class="main-container">
-            <aside class="sidebar">
-                <div class="itinerary-selector" style="background: var(--surface); border: 2px solid var(--border); border-radius: 1rem; padding: 1rem; margin-bottom: 2rem; position: relative;">
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="far fa-circle" style="font-size: 0.8rem; color: var(--text-secondary);"></i>
-                            <input type="text" id="startInput" placeholder="Ma position" style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 0.95rem;">
-                        </div>
-                        <div style="position: absolute; left: 1.45rem; top: 2.2rem; bottom: 2.2rem; width: 2px; border-left: 2px dotted var(--border);"></div>
-                        <div style="height: 1px; background: var(--border); margin-left: 1.5rem;"></div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-map-marker-alt" style="font-size: 0.9rem; color: #EF4444;"></i>
-                            <input type="text" id="endInput" placeholder="Choisir une destination..." style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 0.95rem; font-weight: 500;">
-                            <i class="fas fa-search" style="color: var(--text-secondary);"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="route-header">
-                    <h2 id="currentRouteTitle">Du Louvre au Marais</h2>
-                    <div class="route-stats">
-                        <div class="stat"><i class="fas fa-walking"></i> 3.2 km</div>
-                        <div class="stat"><i class="fas fa-gem"></i> 6 pépites</div>
-                    </div>
-                </div>
-
-                <div class="filter-tabs">
-                    <div class="filter-tab active" data-filter="all">Tout</div>
-                    <div class="filter-tab" data-filter="cafe">Cafés</div>
-                    <div class="filter-tab" data-filter="culture">Culture</div>
-                    <div class="filter-tab" data-filter="food">Resto</div>
-                </div>
-
-                <div class="discovery-cards" id="discoveryCards"></div>
-            </aside>
-
-            <main class="map-container">
-                <div id="map"></div>
-            </main>
+<section class="destinations-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Votre prochain voyage vous attend</h2>
+            <p>Week-ends depuis Paris</p>
         </div>
-    </section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+        <div class="destination-grid">
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400');">
+                <span>Londres, UK</span>
+            </div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400');">
+                <span>Gand, Belgique</span>
+            </div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=400');">
+                <span>Anvers, Belgique</span>
+            </div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400');">
+                <span>Rome, Italie</span>
+            </div>
+        </div>
+    </div>
+</section>
