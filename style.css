@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --primary: #1C7293;
+    --accent: #02C39A;
+    --surface: #FFFFFF;
+    --surface-alt: #F8FAFB;
+    --text: #1A1A1A;
+    --text-secondary: #6B7280;
+    --border: #E5E7EB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--surface-alt); }
+
+.hero-section { height: 60vh; background: #0F172A; color: white; display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero-title { font-family: 'Outfit'; font-size: 3.5rem; }
+.highlight { color: var(--accent); }
+
+.main-container { display: grid; grid-template-columns: 420px 1fr; gap: 2rem; padding: 2rem; max-width: 1600px; margin: 0 auto; }
+.sidebar { background: var(--surface); padding: 2rem; border-radius: 1.5rem; box-shadow: 0 8px 30px rgba(28,114,147,0.1); max-height: 85vh; overflow-y: auto; }
+
+.route-header { background: linear-gradient(135deg, var(--primary), #065A82); color: white; padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem; }
+.route-stats { display: flex; gap: 1rem; margin-top: 1rem; font-size: 0.9rem; }
+
+.filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+.filter-tab { padding: 0.5rem 1rem; border: 2px solid var(--border); border-radius: 2rem; cursor: pointer; font-size: 0.85rem; font-weight: 500; }
+.filter-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+.discovery-card { border: 2px solid var(--border); padding: 1.25rem; border-radius: 1rem; margin-bottom: 1rem; cursor: pointer; transition: 0.3s; }
+.discovery-card:hover { transform: translateX(5px); border-color: var(--accent); }
+
+.map-container { height: 80vh; border-radius: 1.5rem; overflow: hidden; position: sticky; top: 2rem; }
+#map { height: 100%; width: 100%; }
+
+.btn-hero { padding: 1rem 2rem; border-radius: 2rem; text-decoration: none; background: var(--accent); color: #0F172A; font-weight: 600; }
