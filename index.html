@@ -3,174 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Citymapper Horizon - POC</title>
+    <title>Citymapper Horizon - POC École</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* --- STYLE GLOBAL & VARIABLES --- */
-        :root {
-            --primary: #1C7293;
-            --accent: #02C39A;
-            --surface: #FFFFFF;
-            --text: #1A1A1A;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --trip-green: #00aa6c;
-        }
-
-        body { font-family: 'Inter', sans-serif; margin: 0; background: #F8FAFB; color: var(--text); overflow-x: hidden; }
-
-        /* --- NAVIGATION & RECHERCHE (Capture cdb023) --- */
-        .itinerary-selector {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .search-line { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
-        .search-line input { width: 100%; border: none; outline: none; font-size: 0.95rem; }
-        .dot-line { position: absolute; left: 1.45rem; top: 2.2rem; bottom: 2.2rem; width: 2px; border-left: 2px dotted var(--border); }
-
-        /* --- LAYOUT CARTE --- */
-        .main-container { display: grid; grid-template-columns: 420px 1fr; gap: 2rem; padding: 2rem; max-width: 1600px; margin: 0 auto; }
-        .sidebar { background: white; padding: 2rem; border-radius: 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.05); height: 750px; overflow-y: auto; }
-        .map-container { height: 750px; border-radius: 1.5rem; overflow: hidden; position: sticky; top: 20px; }
-        #map { height: 100%; width: 100%; }
-
-        /* --- SECTIONS TRIPADVISOR (Captures ce2487 & ce2806) --- */
-        .section-container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        .section-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
-        .section-header-flex h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: #004f32; margin: 0; }
-
-        /* CARROUSEL */
-        .carousel-container { 
-            display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; 
-            scrollbar-width: none; padding-bottom: 1rem;
-        }
-        .carousel-container::-webkit-scrollbar { display: none; }
-
-        /* CARTES */
-        .recom-card { flex: 0 0 300px; background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
-        .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
-        .card-body { padding: 1.25rem; }
-        .stars { color: var(--trip-green); font-size: 1.1rem; }
-        
-        .dest-card { 
-            flex: 0 0 250px; height: 250px; border-radius: 12px; background-size: cover; 
-            display: flex; align-items: flex-end; padding: 1.5rem; color: white; font-weight: bold;
-        }
-
-        /* BOUTONS NAVIGATION */
-        .nav-btn {
-            width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
-            background: white; cursor: pointer; transition: 0.3s;
-        }
-        .nav-btn:hover { background: #000; color: #fff; }
-
-        /* FOOTER (Capture ce2085) --- */
-        .footer { background: #0F172A; color: white; padding: 5rem 2rem; text-align: center; }
-        .btn-app { 
-            display: inline-flex; align-items: center; gap: 10px; background: white; 
-            color: black; padding: 0.8rem 2rem; border-radius: 3rem; text-decoration: none; font-weight: 600; 
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="itinerary-selector">
-                <div class="dot-line"></div>
-                <div class="search-line">
-                    <i class="far fa-circle" style="font-size: 0.8rem;"></i>
-                    <input type="text" placeholder="Ma position">
-                </div>
-                <div style="height: 1px; background: var(--border); margin: 10px 0 10px 1.5rem;"></div>
-                <div class="search-line">
-                    <i class="fas fa-map-marker-alt" style="color: #EF4444;"></i>
-                    <input type="text" id="destinationInput" placeholder="Palais Garnier, Paris...">
-                </div>
-            </div>
-
-            <div style="background: var(--primary); color: white; padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem;">
-                <h2 style="margin:0">Du Louvre au Marais</h2>
-                <div style="display: flex; gap: 1rem; margin-top: 1rem; font-size: 0.9rem;">
-                    <span><i class="fas fa-walking"></i> 3.2 km</span>
-                    <span><i class="fas fa-gem"></i> 6 pépites</span>
-                </div>
-            </div>
-
-            <div id="cardsList">
-                <div style="padding: 1.25rem; border: 2px solid var(--border); border-radius: 1rem; margin-bottom: 1rem;">
-                    <strong>☕ Café Kitsuné</strong><br>
-                    <small>1ère étape • 2 min</small>
-                </div>
-            </div>
-        </aside>
-
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-    </div>
-
-    <div class="section-container">
-        <div class="section-header-flex">
-            <h2>Paris : voir les expériences à proximité</h2>
-            <div style="display:flex; gap:10px;">
-                <button class="nav-btn" onclick="scrollC('p-scroll', -320)"><i class="fas fa-chevron-left"></i></button>
-                <button class="nav-btn" onclick="scrollC('p-scroll', 320)"><i class="fas fa-chevron-right"></i></button>
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Redéfinir la <span class="highlight">Mobilité</span></h1>
+            <p class="hero-subtitle">Vivre la ville, pas seulement la traverser.</p>
+            <div class="hero-buttons">
+                <a href="#app" class="btn-hero btn-hero-primary">Découvrir l'expérience</a>
             </div>
         </div>
-        <div class="carousel-container" id="p-scroll">
-            <div class="recom-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550156141-1782dd488941?w=400')"></div>
-                <div class="card-body">
-                    <strong>Dîner Croisière Prestige</strong>
-                    <div class="stars">●●●●◐ (491)</div>
-                    <div>à partir de 62€</div>
+    </section>
+
+    <section class="app-section" id="app">
+        <header class="header">
+            <nav class="nav">
+                <a href="#hero" class="logo"><i class="fas fa-map-marked-alt"></i> <span>Horizon</span></a>
+            </nav>
+        </header>
+
+        <div class="main-container">
+            <aside class="sidebar">
+                <div class="itinerary-selector" style="background: var(--surface); border: 2px solid var(--border); border-radius: 1rem; padding: 1rem; margin-bottom: 2rem; position: relative;">
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="far fa-circle" style="font-size: 0.8rem; color: var(--text-secondary);"></i>
+                            <input type="text" id="startInput" placeholder="Ma position" style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 0.95rem;">
+                        </div>
+                        <div style="position: absolute; left: 1.45rem; top: 2.2rem; bottom: 2.2rem; width: 2px; border-left: 2px dotted var(--border);"></div>
+                        <div style="height: 1px; background: var(--border); margin-left: 1.5rem;"></div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 0.9rem; color: #EF4444;"></i>
+                            <input type="text" id="endInput" placeholder="Choisir une destination..." style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 0.95rem; font-weight: 500;">
+                            <i class="fas fa-search" style="color: var(--text-secondary);"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
-    </div>
 
-    <div class="section-container">
-        <div class="section-header-flex">
-            <h2>Votre prochain voyage vous attend</h2>
-            <div style="display:flex; gap:10px;">
-                <button class="nav-btn" onclick="scrollC('d-scroll', -270)"><i class="fas fa-chevron-left"></i></button>
-                <button class="nav-btn" onclick="scrollC('d-scroll', 270)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-        <div class="carousel-container" id="d-scroll">
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400')">Londres, UK</div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400')">Gand, Belgique</div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400')">Anvers, Belgique</div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400')">Rome, Italie</div>
-        </div>
-    </div>
+                <div class="route-header">
+                    <h2 id="currentRouteTitle">Du Louvre au Marais</h2>
+                    <div class="route-stats">
+                        <div class="stat"><i class="fas fa-walking"></i> 3.2 km</div>
+                        <div class="stat"><i class="fas fa-gem"></i> 6 pépites</div>
+                    </div>
+                </div>
 
-    <footer class="footer">
-        <h2>Prêt à redécouvrir <span style="color:var(--accent)">votre ville</span> ?</h2>
-        <div style="margin: 2rem 0;">
-            <a href="#" class="btn-app" style="margin-right:1rem;"><i class="fab fa-apple"></i> App Store</a>
-            <a href="#" class="btn-app"><i class="fab fa-google-play"></i> Google Play</a>
+                <div class="filter-tabs">
+                    <div class="filter-tab active" data-filter="all">Tout</div>
+                    <div class="filter-tab" data-filter="cafe">Cafés</div>
+                    <div class="filter-tab" data-filter="culture">Culture</div>
+                    <div class="filter-tab" data-filter="food">Resto</div>
+                </div>
+
+                <div class="discovery-cards" id="discoveryCards"></div>
+            </aside>
+
+            <main class="map-container">
+                <div id="map"></div>
+            </main>
         </div>
-    </footer>
+    </section>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Carte
-        const map = L.map('map').setView([48.86, 2.34], 14);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-        // Scroll Carrousel
-        function scrollC(id, amt) {
-            document.getElementById(id).scrollBy({ left: amt, behavior: 'smooth' });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
