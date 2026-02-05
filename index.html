@@ -1,71 +1,43 @@
 <section class="recommendations-section">
     <div class="container">
-        <div class="section-header">
-            <h2>Paris : voir les expériences à proximité</h2>
-            <p>Choix incontournables à proximité</p>
+        <div class="section-header-flex">
+            <div>
+                <h2>Paris : voir les expériences à proximité</h2>
+                <p>Choix incontournables à proximité</p>
+            </div>
+            <div class="carousel-controls">
+                <button class="ctrl-btn prev" onclick="moveCarousel('paris-grid', -1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="ctrl-btn next" onclick="moveCarousel('paris-grid', 1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
         </div>
         
-        <div class="recommendation-grid">
-            <div class="recom-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550156141-1782dd488941?auto=format&fit=crop&w=400');">
-                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                </div>
-                <div class="card-info">
-                    <span class="badge">Meilleures ventes</span>
-                    <h3>Dîner Croisière Prestige au départ de la Tour Eiffel</h3>
-                    <div class="rating">4,4 <span class="stars">●●●●◐</span> (491)</div>
-                    <div class="price">à partir de 62€ par adulte</div>
-                </div>
-            </div>
-
-            <div class="recom-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=400');">
-                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                    <div class="travel-badge">2025</div>
-                </div>
-                <div class="card-info">
-                    <span class="badge">Meilleures ventes</span>
-                    <h3>Musée du Louvre - Visite guidée exclusive (entrée incluse)</h3>
-                    <div class="rating">5,0 <span class="stars">●●●●●</span> (3257)</div>
-                    <div class="price">à partir de 150€ par adulte</div>
-                </div>
-            </div>
-
-            <div class="recom-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400');">
-                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                </div>
-                <div class="card-info">
-                    <span class="badge">Meilleures ventes</span>
-                    <h3>Bateaux Parisiens Seine Dîner gastronomique</h3>
-                    <div class="rating">4,3 <span class="stars">●●●●◐</span> (2930)</div>
-                    <div class="price">à partir de 125€ par adulte</div>
-                </div>
-            </div>
-        </div>
+        <div class="carousel-container" id="paris-grid">
+            <div class="recom-card">...</div>
+            <div class="recom-card">...</div>
+            <div class="recom-card">...</div>
+            <div class="recom-card">...</div> </div>
     </div>
 </section>
 
 <section class="destinations-section">
     <div class="container">
-        <div class="section-header">
-            <h2>Votre prochain voyage vous attend</h2>
-            <p>Week-ends depuis Paris</p>
+        <div class="section-header-flex">
+            <div>
+                <h2>Votre prochain voyage vous attend</h2>
+                <p>Week-ends depuis Paris</p>
+            </div>
+            <div class="carousel-controls">
+                <button class="ctrl-btn prev" onclick="moveCarousel('dest-grid', -1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="ctrl-btn next" onclick="moveCarousel('dest-grid', 1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
         </div>
 
-        <div class="destination-grid">
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400');">
-                <span>Londres, UK</span>
-            </div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400');">
-                <span>Gand, Belgique</span>
-            </div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=400');">
-                <span>Anvers, Belgique</span>
-            </div>
-            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400');">
-                <span>Rome, Italie</span>
-            </div>
+        <div class="carousel-container" id="dest-grid">
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400');"><span>Londres, UK</span></div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400');"><span>Gand, Belgique</span></div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400');"><span>Anvers, Belgique</span></div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400');"><span>Rome, Italie</span></div>
+            <div class="dest-card" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1525124330893-979969695484?w=400');"><span>Brighton, UK</span></div>
         </div>
     </div>
 </section>
